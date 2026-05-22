@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration Form</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f0f2f5;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+
+    .form-box{
+      background:white;
+      padding:25px;
+      width:400px;
+      border-radius:10px;
+      box-shadow:0 0 10px rgba(0,0,0,0.2);
+    }
+
+    h2{
+      text-align:center;
+      margin-bottom:20px;
+    }
+
+    input, select{
+      width:100%;
+      padding:10px;
+      margin:8px 0 15px;
+      border:1px solid #ccc;
+      border-radius:5px;
+    }
+
+    button{
+      width:100%;
+      padding:10px;
+      background:green;
+      color:white;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    button:hover{
+      background:darkgreen;
+    }
+
+    .error{
+      color:red;
+      font-size:14px;
+    }
+
+    .success{
+      color:green;
+      text-align:center;
+      font-size:16px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="form-box">
+  <h2>Student Registration Form</h2>
+
+  <form id="studentForm">
+
+    <input type="text" id="fullname" placeholder="Enter Full Name">
+
+    <input type="email" id="email" placeholder="Enter Email">
+
+    <input type="text" id="studentId" placeholder="Enter Student ID">
+
+    <select id="course">
+      <option value="">Select Course</option>
+      <option>Computer Science</option>
+      <option>Information Technology</option>
+      <option>Software Engineering</option>
+      <option>Networking</option>
+    </select>
+
+    <input type="password" id="password" placeholder="Create Password">
+
+    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+
+    <div id="message"></div>
+
+    <button type="submit">Register Student</button>
+
+  </form>
+</div>
+
+<script>
+
+  const form = document.getElementById("studentForm");
+  const message = document.getElementById("message");
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let fullname = document.getElementById("fullname").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let studentId = document.getElementById("studentId").value.trim();
+    let course = document.getElementById("course").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+
+    message.innerHTML = "";
+
+    // Validation
+    if(fullname === ""){
+      message.innerHTML = "<p class='error'>Full Name is required</p>";
+      return;
+    }
+
+    if(email === ""){
+      message.innerHTML = "<p class='error'>Email is required</p>";
+      return;
+    }
+
+    if(!email.includes("@")){
+      message.innerHTML = "<p class='error'>Enter valid email</p>";
+      return;
+    }
+
+    if(studentId === ""){
+      message.innerHTML = "<p class='error'>Student ID is required</p>";
+      return;
+    }
+
+    if(course === ""){
+      message.innerHTML = "<p class='error'>Please select course</p>";
+      return;
+    }
+
+    if(password.length < 6){
+      message.innerHTML = "<p class='error'>Password must be at least 6 characters</p>";
+      return;
+    }
+
+    if(password !== confirmPassword){
+      message.innerHTML = "<p class='error'>Passwords do not match</p>";
+      return;
+    }
+
+    message.innerHTML = "<p class='success'>Student Registered Successfully!</p>";
+
+    form.reset();
+  });
+
+</script>
+
+</body>
+</html>
